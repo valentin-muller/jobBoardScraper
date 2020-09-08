@@ -4,6 +4,8 @@
 
 ![Alt Text](https://media.giphy.com/media/Pj7Kd0dZwnyqw68Aso/giphy.gif)
 
+The Scraper pulls the data using GitHub Jobs API and manipulates it via Node.js, finally it pushes all the Jobs (Only with "Software" in their title && Ascending Date) into a Google Spreadsheet.
+
 Technologies used:
 - Node.js
 - GitHub Jobs API
