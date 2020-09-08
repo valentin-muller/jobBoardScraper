@@ -10,13 +10,9 @@ module.exports = class Sheet {
     await this.doc.useServiceAccountAuth(require("./credentials.json"));
     await this.doc.loadInfo();
   }
-  async addRows() {
+  async addRows(rows) {
     const sheet = this.doc.sheetsByIndex[0];
-
-    await sheet.addRows([
-      { title: "Software Engineer", location: "SF" },
-      { title: "Designer", location: "NY" },
-    ]);
+    await sheet.addRows(rows);
   }
 }
 

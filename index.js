@@ -1,22 +1,24 @@
-const { GoogleSpreadsheet } = require("google-spreadsheet");
-
-// spreadsheet key is the long id in the sheets URL
-const doc = new GoogleSpreadsheet(
-  "1nnqS7DxrpSV3CAqbP0yH4feC9EpQW89EFHqMT3ACGi8"
-);
+const Sheet = require("./sheet");
+const fetch = require("node-fetch");
 
 (async function () {
-  // OR load directly from json file if not in secure environment
-  await doc.useServiceAccountAuth(require("./credentials.json"));
 
-  await doc.loadInfo(); // loads document properties and worksheets
-  console.log(doc.title);
-  await doc.updateProperties({ title: "renamed doc" });
+  const res = await fetch("https://jobs.github.com/positions.json?location=remote");
+  const json = await res.json();
 
-  const sheet = doc.sheetsByIndex[0]; // or use doc.sheetsById[id]
+  const rows = json.map((job) => {
+    return {
+      company: job.company,
+      title: job.title,
+      location: job.location,
+      date: job.created_at,
+      url: job.url,
+    };
+  });
+
+    const sheet = new Sheet();
+    await sheet.load();
+
+    await sheet.addRows(rows);
   
-  await sheet.addRows([
-    { title: "Software Engineer", location: "SF" },
-    { title: "Designer", location: "NY" },
-  ]);
 })();
