@@ -24,18 +24,35 @@ async function scrapePage(i) {
     let rows = [];
     while(true) {
        const newRows = await scrapePage(i);
-       console.log('new row length', newRows.length);
+    //    console.log('new row length', newRows.length);
         if (newRows.length === 0) break;
         rows = rows.concat(newRows);
         i++;
     }
 
-    console.log('total rows length', rows.length);
-    
+
+    // Challenge 1: sort date function
+    // Challenge 2: filter JavaScript jobs -> "js.includes("js")
+
+
+
+    let filtered = rows.filter((a) => {
+      return a.title.includes("Software");
+    });
+
+    let sorted = filtered.sort((a, b) => {
+        let dateA = new Date(a.date);
+        let dateB = new Date(b.date);
+        return dateA - dateB;
+    });
+
+
+    // console.log('total rows length', rows.length);
+    // console.log('All Data', filtered);
 
     const sheet = new Sheet();
     await sheet.load();
 
-    await sheet.addRows(rows);
+    await sheet.addRows(sorted);
   
 })();
