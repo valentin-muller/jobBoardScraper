@@ -24,7 +24,7 @@ async function scrapePage(i) {
     let rows = [];
     while(true) {
        const newRows = await scrapePage(i);
-    //    console.log('new row length', newRows.length);
+       console.log('new row length', newRows.length);
         if (newRows.length === 0) break;
         rows = rows.concat(newRows);
         i++;
@@ -47,8 +47,8 @@ async function scrapePage(i) {
     });
 
 
-    // console.log('total rows length', rows.length);
-    // console.log('All Data', filtered);
+    console.log('total rows length', rows.length);
+    console.log('All Data', sorted);
 
     const sheet = new Sheet();
     await sheet.load();
