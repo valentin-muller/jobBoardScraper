@@ -1,5 +1,9 @@
 # Job Board Scraper
 
+
+
+![Alt Text](https://media.giphy.com/media/Pj7Kd0dZwnyqw68Aso/giphy.gif)
+
 Technologies used:
 - Node.js
 - GitHub Jobs API
